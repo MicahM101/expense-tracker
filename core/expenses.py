@@ -24,7 +24,7 @@ def initialize_CSV():
 def addExpense(amount, category, description):
     initialize_CSV()
     # initialize the date for the new entry
-    currentDate = datetime.today()
+    currentDate = datetime.today().strftime("%Y-%m-%d")
     # initialize the id for the new entry
     with open(CSV_PATH, "r", newline='') as rfile:
         reader = csv.reader(rfile)
@@ -63,6 +63,24 @@ def deleteExpense(id):
     with open(CSV_PATH, "w", newline = '') as wfile:
         writer = csv.writer(wfile)
         writer.writerows(buffer_list)
+
+
+def summaryExpenses():
+
+    # Code to create a new a dictionary holding the total spend of all categories identified in the CSV file
+    summaryDict = {}
+    with open(CSV_PATH, 'r', newline='') as rfile:
+        summaryReader = csv.reader(rfile)
+        next(summaryReader)
+        for row in summaryReader:
+            if row[3] in summaryDict:
+                summaryDict[row[3]] += float(row[2])
+            else:
+                summaryDict[row[3]] = float(row[2])
+    
+    return summaryDict
+
+
 
 
 
