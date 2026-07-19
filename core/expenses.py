@@ -46,6 +46,7 @@ def addExpense(amount, category, description):
         
 
 def loadExpense():
+    initialize_CSV
     expenses = []
     with open(CSV_PATH, 'r', newline='') as loadFile:
         loadReader = csv.reader(loadFile)
@@ -54,6 +55,7 @@ def loadExpense():
     return expenses
 
 def deleteExpense(id):
+    initialize_CSV
     with open(CSV_PATH, 'r', newline='') as rfile:
         reader = csv.reader(rfile)
         buffer_list = list(reader)
