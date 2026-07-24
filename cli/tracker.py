@@ -24,6 +24,40 @@ def add(amount, category, description):
     addExpense(amount, category, description)
     console.print("Expense has been added to records!")
 
+#######
+# Command for the loadExpense function
+#######
+
+@cli.command()
+# Line of code creating a table command
+def list():
+    # Code initializing the Expense Table
+    table = Table(title="List of Expenses")
+
+    # Code to add columns 
+    table.add_column("ID")
+    table.add_column("Date")
+    table.add_column("Amount")
+    table.add_column("Category")
+    table.add_column("Description")
+
+    # Populating the expense list
+    expenseList = loadExpense()
+
+    # Code removing the first line of the CSV from its list
+    expenseList = expenseList[1:]
+
+    # Check for if the list is empty
+    if not expenseList:
+        console.print("No expense found!")
+        return
+
+    # Loop adding the rows of the CSV into the command line rich table; Each row is split into its elements to 
+    # match the table's columns
+    for row in expenseList:
+        table.add_row(row[0], row[1], row[2], row[3], row[4])
+
+    console.print(table)
 
 
 if __name__ == "__main__":
