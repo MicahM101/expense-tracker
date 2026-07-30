@@ -60,5 +60,23 @@ def list():
     console.print(table)
 
 
+#######
+# Command for the delete expenses function
+#######
+
+@cli.command()
+
+# Options for the arguments needed for the function
+@click.option('--ID', prompt='ID', type=int, help='The ID of the expense you would like to delete')
+
+def delete(int ID):
+    # Return message for if the file is found and deleted and if it isn't
+    if deleteExpense(ID):
+        console.print("The expense was deleted from file")
+    else:
+        console.print("This expense ID was not found on file, hence, it was not deleted.")
+
+
+
 if __name__ == "__main__":
     cli()

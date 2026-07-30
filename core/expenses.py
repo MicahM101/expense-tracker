@@ -55,16 +55,26 @@ def loadExpense():
     return expenses
 
 def deleteExpense(id):
-    initialize_CSV
+    initialize_CSV()
     with open(CSV_PATH, 'r', newline='') as rfile:
         reader = csv.reader(rfile)
         buffer_list = list(reader)
+
+        # Checking if the line is in the file at all, returning false if it isn't
+        existo = False
+        for row in buffer_list:
+            if row[0] == str(id):
+                existo = True
+        # Return statement        
+        if not existo:
+            return False
     
     buffer_list = [row for row in buffer_list if row[0] != str(id)]
-
     with open(CSV_PATH, "w", newline = '') as wfile:
         writer = csv.writer(wfile)
         writer.writerows(buffer_list)
+    
+    return True
 
 
 def summaryExpenses():
