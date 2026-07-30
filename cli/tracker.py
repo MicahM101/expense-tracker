@@ -69,7 +69,7 @@ def list():
 # Options for the arguments needed for the function
 @click.option('--ID', prompt='ID', type=int, help='The ID of the expense you would like to delete')
 
-def delete(int ID):
+def delete(ID):
     # Return message for if the file is found and deleted and if it isn't
     if deleteExpense(ID):
         console.print("The expense was deleted from file")
