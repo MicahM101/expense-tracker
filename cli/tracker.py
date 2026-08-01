@@ -77,6 +77,34 @@ def delete(ID):
         console.print("This expense ID was not found on file, hence, it was not deleted.")
 
 
+######
+# Command for the summary expenses function
+######
+
+@cli.command()
+# Function for the delete function
+def summary():
+
+    # Creating a table for summary expenses
+    etable = Table(title=("Expense Summary"))
+
+    # Code to add columns to the table
+    etable.add_column("Category")
+    etable.add_column("Spend")
+
+    # Creating a loop to add rows to the table from the dictionary
+    summary_dict = summaryExpenses()
+
+    # Empty check
+    if not summary_dict:
+        print("No expenses found for summary")
+        return
+
+    for key in summary_dict:
+        etable.add_row(key, str(summary_dict[key]))
+
+    console.print(etable)
+
 
 if __name__ == "__main__":
     cli()
